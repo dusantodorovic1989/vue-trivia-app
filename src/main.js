@@ -5,6 +5,7 @@ import TriviaApp from './components/TriviaApp.vue'
 import Vuex from 'vuex'
 import { chuckStore } from './store/chuckStore.js'
 import {triviaStore} from './store/triviaStore.js'
+import Chuck from './components/Chuck.vue'
 
 Vue.use(VueRouter)
 
@@ -15,13 +16,14 @@ Vue.config.productionTip = false
 const store = new Vuex.Store({
   modules:{
     chuckStore,
-    triviaStore
+    triviaStore,
   }
 })
 
 const routes = [
   {path:'/', redirect:'/trivia'},
   {path:'/trivia', component: TriviaApp, name:'trivia'},
+  {path:'/chuck', component: Chuck, name:'chuck'},
 ]
 
 const router = new VueRouter({
