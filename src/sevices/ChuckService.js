@@ -4,8 +4,8 @@ const Chuck  = require('chucknorris-io'),
       client = new Chuck();
 
 class ChuckService {
-    getRandomJoke(){
-        return client.getRandomJoke();
+    getRandomJoke(category){
+        return client.getRandomJoke(category);
     }
 }
 const chuck = new ChuckService();

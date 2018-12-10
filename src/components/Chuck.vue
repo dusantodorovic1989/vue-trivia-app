@@ -1,11 +1,22 @@
 <template>
-     <div class="alert alert-info" role="alert">
-        {{ randJoke }}
+     <div class="container">
+        <div>
+        <!-- <img class="chuck-image" src="https://pics.me.me/chuck-norri-17239471.png"> -->
+        <form @submit.prevent="getNewJoke(categoryy)">
+        <input type="text" v-model="categoryy">
+        <button type="submit" class="btn btn-primary">Get New Joke</button>
+        </form>
+      <h2>{{ joke.value }}</h2>
+      <a :href="joke.sourceUrl" class="btn btn-info">See source</a>
+        
+        </div>
+        
     </div>
 </template>
 
 <script>
 import ChuckService from '../sevices/ChuckService'
+import { mapGetters, mapActions } from "vuex"
 export default {
     // created() {
     //     ChuckService.getRandomJoke()
@@ -16,21 +27,34 @@ export default {
             
     //     }) 
     // }
+    data(){
+        return {
+            categoryy:""
+        }
+    },
 
-      beforeRouteEnter(to, from, next) {
+    beforeRouteEnter(to, from, next) {
         next(vm => {
             // console.log('sdfsdf')
-            vm.$store.dispatch('joke');
+            vm.$store.dispatch('getNewJoke');
         })
+    },
+    methods:{
+       
+        ...mapActions(['getNewJoke'])
     },
 
     computed: {
-        //preko computed propertija smo dovukli getter iz ChuckStore.js i ispisali smo njegov value
-        //i onda ispisujemo ovaj computed properti
-        randJoke() {
-            return this.$store.getters.randomJoke.value;
-        }
-    },
+        ...mapGetters({
+      joke: "randomJoke",
+      category: "category"
+    })
+        
+        
+    }
+    
+
+    
 
 }
 </script>
